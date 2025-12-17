@@ -1,136 +1,73 @@
-🩺 HealthMonitor – Health Monitoring System
+# HealthMonitor - IoT Health Monitoring System
 
-A comprehensive **IoT-enabled health monitoring platform** built using **Next.js**, **Supabase**, and **AI (GPT-5 via Vercel AI SDK)**. The system enables real-time health tracking, AI-powered medical insights, and instant access to **India-focused emergency services**.
+A comprehensive IoT-enabled health monitoring platform built with Next.js, Supabase, and AI SDK. Monitor your health in real-time, get AI-powered health insights, and access emergency services instantly.
 
-> ⚠️ Disclaimer: This platform is for educational and informational purposes only. It is **not a substitute for professional medical advice, diagnosis, or treatment**.
+## Features
 
----
-🚀 Key Features
+### 1. Smart Wearable Integration
+- Connect smartwatches and fitness trackers
+- Real-time vital signs monitoring (heart rate, blood pressure, oxygen saturation)
+- Track sleep patterns, steps, and calories
+- Automated risk score calculation
+- Health alerts for abnormal metrics
 
-1️⃣ Smart Wearable Integration
+### 2. AI Health Assistant Chatbot
+- AI-powered symptom analysis using GPT-5
+- Disease prediction based on symptoms
+- Personalized health recommendations
+- India-specific medical guidance
+- Emergency contact suggestions for severe cases
 
-* Connect smartwatches and fitness trackers
-* Real-time monitoring of vital signs:
+### 3. Health Data Dashboard
+- **CSV Upload Feature**: Upload health data in any CSV format
+- Automatic risk prediction and scoring
+- Visual health metrics trends with charts
+- Device management system
+- Health alerts and notifications
 
-  * Heart rate
-  * Blood pressure
-  * Oxygen saturation (SpO₂)
-  * Body temperature
-* Tracks steps, calories, sleep patterns, and stress levels
-* Automated **health risk score calculation**
-* Alerts for abnormal health metrics
+### 4. Emergency Services (India-focused)
+- Quick access to emergency numbers (108, 104)
+- Location-based hospital finder
+- Ajeenkya DY Patil University Medical Center contact
+- Additional helplines (mental health, women, child, senior citizen)
 
----
+## Technology Stack
 
-2️⃣ AI Health Assistant Chatbot
+- **Frontend**: Next.js 16, React 19, TypeScript
+- **UI**: Tailwind CSS v4, shadcn/ui components
+- **Database**: Supabase (PostgreSQL with RLS)
+- **AI**: Vercel AI SDK v5 with OpenAI GPT-5
+- **Charts**: Recharts
+- **Authentication**: Supabase Auth
 
-* AI-powered symptom analysis using **GPT-5**
-* Disease prediction with severity estimation
-* Personalized health recommendations
-* India-specific medical guidance
-* Emergency contact suggestions for critical symptoms
+## Getting Started
 
----
+### Prerequisites
 
-3️⃣ Health Data Dashboard
+- Node.js 18+ installed
+- A Vercel account
+- Supabase project (automatically configured in v0)
 
-* 📂 **CSV Upload Support** (flexible format)
-* Automatic parsing and validation of health data
-* AI-based risk prediction and scoring
-* Interactive charts and trend analysis
-* Device management interface
-* Health alerts and notifications
+### Installation
 
----
+1. The database schema is automatically set up via the SQL script in `scripts/001_create_health_tables.sql`
+2. All environment variables are pre-configured through the Supabase integration
+3. Deploy to Vercel or run locally using the v0 preview
 
-4️⃣ Emergency Services (India-Focused)
+### Database Schema
 
-* One-tap access to emergency numbers
-* Location-based hospital finder
-* Ajeenkya DY Patil University Medical Center contact
-* Additional national helplines (mental health, women, children, senior citizens)
+The system includes the following tables:
+- `profiles` - User profile information
+- `wearable_devices` - Connected smartwatch/tracker data
+- `health_metrics` - Real-time health measurements with risk scores
+- `symptom_chats` - AI chatbot conversation history
+- `health_alerts` - Health risk notifications
 
----
+All tables are protected with Row Level Security (RLS) policies.
 
-🛠️ Technology Stack
+### CSV Upload Format
 
-| Layer          | Technology                       |
-| -------------- | -------------------------------- |
-| Frontend       | Next.js 16, React 19, TypeScript |
-| UI             | Tailwind CSS v4, shadcn/ui       |
-| Charts         | Recharts                         |
-| Database       | Supabase (PostgreSQL + RLS)      |
-| Authentication | Supabase Auth                    |
-| AI             | Vercel AI SDK v5, OpenAI GPT-5   |
-| Hosting        | Vercel                           |
-
----
-
-⚙️ Getting Started
-
-Prerequisites
-
-* Node.js **18+**
-* Vercel account
-* Supabase project (auto-configured via v0)
-
----
-
-Installation & Setup
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/cynthiax04/v0-health-monitoring-system.git
-cd v0-health-monitoring-system
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Set up the database:
-
-* SQL schema is available at:
-
-  ```
-  scripts/001_create_health_tables.sql
-  ```
-* Apply it in the Supabase SQL Editor
-
-4. Environment variables:
-
-* Supabase and AI keys are automatically configured when deployed via **v0 + Vercel**
-
-5. Run locally:
-
-```bash
-npm run dev
-```
-
-6. Deploy:
-
-* Deploy directly to **Vercel** (recommended)
-
----
-
-🗄️ Database Schema
-
-| Table            | Description                             |
-| ---------------- | --------------------------------------- |
-| profiles         | User profile information                |
-| wearable_devices | Connected wearable devices              |
-| health_metrics   | Health data with calculated risk scores |
-| symptom_chats    | AI chatbot conversation history         |
-| health_alerts    | Health risk notifications               |
-
-🔐 Row Level Security (RLS) is enabled on all tables.
-
----
-
-📊 CSV Upload Format (Example)
+Upload health data with any of these column headers:
 
 ```csv
 heart_rate,blood_pressure_systolic,blood_pressure_diastolic,oxygen_saturation,temperature,steps,calories_burned,sleep_hours,stress_level
@@ -139,82 +76,66 @@ heart_rate,blood_pressure_systolic,blood_pressure_diastolic,oxygen_saturation,te
 92,135,88,96.8,99.1,4500,210,5.8,8
 ```
 
-Automatic Processing Includes:
+The system automatically:
+- Parses various CSV formats
+- Calculates risk scores based on vital signs
+- Generates health alerts for high-risk metrics
+- Stores data securely in your database
 
-* Flexible CSV parsing
-* Health risk score calculation
-* Alert generation for high-risk metrics
-* Secure storage in Supabase
+## Risk Scoring System
 
----
+The platform calculates health risk scores based on:
 
-📈 Risk Scoring System
+- **Heart Rate**: Normal range 60-100 bpm
+- **Blood Pressure**: Normal <120/80 mmHg
+- **Oxygen Saturation**: Normal >95%
+- **Temperature**: Normal 97-99°F
+- **Stress Level**: Scale of 1-10
 
-| Metric            | Normal Range |
-| ----------------- | ------------ |
-| Heart Rate        | 60–100 bpm   |
-| Blood Pressure    | <120/80 mmHg |
-| Oxygen Saturation | >95%         |
-| Temperature       | 97–99 °F     |
-| Stress Level      | 1–10         |
+Risk levels: **Low** (0-3 points), **Medium** (4-6 points), **High** (7+ points)
 
-### Risk Levels
+## AI Medical Assistant
 
-* Low: 0–3 points
-* Medium: 4–6 points
-* High: 7+ points
+The AI chatbot provides:
+- Symptom analysis with follow-up questions
+- Disease prediction with severity assessment
+- India-specific medical recommendations
+- Emergency service guidance
+- Cultural sensitivity for Indian healthcare context
 
----
-🤖 AI Medical Assistant – Capabilities
-Advantages
+**Important**: The AI assistant is not a replacement for professional medical advice. Always consult qualified healthcare providers for proper diagnosis and treatment.
 
-* Fast preliminary health insights
-* Personalized recommendations
-* 24/7 availability
-* India-specific medical context
+## Emergency Contacts (India)
 
-Disadvantages
+- **Ambulance**: 108
+- **Medical Helpline**: 104
+- **Police**: 100
+- **Mental Health**: 080-46110007
+- **Women Helpline**: 1091
+- **Child Helpline**: 1098
+- **Senior Citizen Helpline**: 14567
 
-* Not a replacement for doctors
-* Predictions depend on input accuracy
-* Limited clinical validation
+## Security
 
-Example Use Case
+- Row Level Security (RLS) enabled on all tables
+- User authentication via Supabase Auth
+- Secure password hashing
+- Protected API routes
+- HTTPS-only in production
 
-> User uploads CSV → System detects high BP → AI chatbot recommends medical consultation and emergency numbers
+## Contributing
 
----
+This is a v0-generated project. To modify:
+1. Use v0.app to make changes via AI
+2. Download and customize locally
+3. Deploy via Vercel
 
-🚨 Emergency Contacts (India)
+## License
 
-* **Ambulance**: 108
-* **Medical Helpline**: 104
-* **Police**: 100
-* **Mental Health**: 080-46110007
-* **Women Helpline**: 1091
-* **Child Helpline**: 1098
-* **Senior Citizen Helpline**: 14567
+Created with v0 by Vercel
 
----
+## Support
 
-🔐 Security Features
+For medical emergencies, call 108 immediately.
 
-Advantages
-
-* Supabase Auth with secure password hashing
-* Row Level Security (RLS)
-* Protected API routes
-* HTTPS-only in production
-
-Limitations
-
-* Requires correct Supabase policy configuration
-* API key exposure risk if misconfigured
-
-## 📄 License
-
-This project is intended for **academic and demonstration purposes**.
-
----
-
-⭐ If you find this project useful, consider giving it a star on GitHub!
+For technical support, visit vercel.com/help
